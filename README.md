@@ -1,10 +1,7 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
 This project is built using part of react-materialUI-starter-kit components from this code sources:
 https://github.com/baoduy/React-MaterialUI-Starter-Kit
 
+## Available Scripts
 
 In the project directory, you can run:
 

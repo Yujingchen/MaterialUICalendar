@@ -9,10 +9,10 @@ import withStyles from '@material-ui/core/styles/withStyles';
 // core components
 // import Header from '../components/Header/Header.jsx';
 // import Footer from '../components/Footer/Footer.jsx';
-import Sidebar from '../components/Sidebar/Sidebar';
+import Sidebar from '../component/sidebar/Sidebar';
 // import MessageBox from '../components/MessageBox';
-import dashboardRoutes from 'routes/dashboard';
-// import dashboardStyle from './dashboardStyle.jsx';
+import dashboardRoutes from '../routes/dashboard';
+import dashboardStyle from './dashboardStyle.jsx';
 
 //Actions
 // import NotificationActions from '../actions/Notifications';
@@ -86,7 +86,7 @@ class App extends React.Component {
 
         <Sidebar
           routes={dashboardRoutes}
-          logoText={'Drunkcoding'}
+          logoText={'TRAININGO'}
           logo={logo}
           image={image}
           handleDrawerToggle={this.handleDrawerToggle}

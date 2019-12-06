@@ -2,7 +2,7 @@
 import Loader from '../views/loaders';
 
 const Dashboard = Loader(() =>
-  import(/* webpackChunkName: "Dashboard" */ '../views/Dashboard/Dashboard')
+  import(/* webpackChunkName: "Dashboard" */ '../layouts/Dashboard')
 );
 
 export default [{ path: '/', component: Dashboard }];
