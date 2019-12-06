@@ -1,7 +1,7 @@
 // @material-ui/icons
 import Dashboard from '@material-ui/icons/Dashboard';
 // import Person from '@material-ui/icons/Person';
-// import ContentPaste from '@material-ui/icons/Assessment';
+import ContentPaste from '@material-ui/icons/Assessment';
 // import LibraryBooks from '@material-ui/icons/LibraryBooks';
 // import BubbleChart from '@material-ui/icons/BubbleChart';
 // import LocationOn from '@material-ui/icons/LocationOn';
@@ -12,7 +12,7 @@ import Dashboard from '@material-ui/icons/Dashboard';
 //import DashboardPage from '../views/Dashboard/Dashboard.js';
 //import UserProfile from '../views/UserProfile/UserProfile.jsx';
 //import UserListing from '../views/UserProfile/UserListing.jsx';
-//import TableList from '../views/TableList/TableList.jsx';
+// import TableList from '../views/TableList/TableList.jsx';
 //import Typography from '../views/Typography/Typography.jsx';
 //import Icons from '../views/Icons/Icons.jsx';
 //import Maps from '../views/Maps/Maps.jsx';
@@ -30,9 +30,9 @@ const DashboardPage = Loader(() =>
 //   import(/* webpackChunkName: "UserListingView" */ '../views/UserProfile/UserListing.jsx')
 // );
 
-// const TableList = Loader(() =>
-//   import(/* webpackChunkName: "TableListView" */ '../views/TableList/TableList.jsx')
-// );
+const ClientTable = Loader(() =>
+  import(/* webpackChunkName: "TableListView" */ '../views/ClientTable/ClientTable')
+);
 
 // const Typography = Loader(() =>
 //   import(/* webpackChunkName: "TypographyView" */ '../views/Typography/Typography.jsx')
@@ -73,13 +73,13 @@ export default [
   //   icon: Person,
   //   component: UserListing
   // },
-  // {
-  //   path: '/table',
-  //   sidebarName: 'Table List',
-  //   navbarName: 'Table List',
-  //   icon: ContentPaste,
-  //   component: TableList
-  // },
+  {
+    path: '/table',
+    sidebarName: 'Table List',
+    navbarName: 'Table List',
+    icon: ContentPaste,
+    component: ClientTable
+  },
   // {
   //   path: '/typography',
   //   sidebarName: 'Typography',
