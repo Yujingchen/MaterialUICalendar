@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@jfschmiechen/react-event-calendar": "^0.2.7",
     "@material-ui/core": "^3.9.3",
     "@material-ui/icons": "^3.0.2",
     "@testing-library/jest-dom": "^4.2.4",
