@@ -64,7 +64,8 @@ const tableStyle = theme => ({
   },
   cellHidden: {
     display: 'none'
-  }
+  },
+
 });
 
 export default tableStyle;

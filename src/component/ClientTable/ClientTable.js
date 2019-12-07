@@ -10,7 +10,6 @@ import TableCell from '@material-ui/core/TableCell';
 // core components
 import tableStyle from './tableStyle';
 import ActionCell from './ActionCell';
-
 function CustomTable({ ...props }) {
     const {
         classes,
@@ -19,6 +18,8 @@ function CustomTable({ ...props }) {
         tableHeaderColor,
         actionColumns
     } = props;
+
+
     return (
         <div className={classes.tableResponsive}>
             <Table className={classes.table}>
@@ -68,6 +69,7 @@ function CustomTable({ ...props }) {
                     })}
                 </TableBody>
             </Table>
+
         </div>
     );
 }

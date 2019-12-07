@@ -10,6 +10,9 @@ import TableCell from '@material-ui/core/TableCell';
 // core components
 import tableStyle from './tableStyle';
 import ActionCell from './ActionCell';
+import SortIcon from '@material-ui/icons/Sort';
+import Tooltip from '@material-ui/core/Tooltip';
+import Button from '@material-ui/core/Button';
 
 function CustomTable({ ...props }) {
   const {
@@ -17,7 +20,8 @@ function CustomTable({ ...props }) {
     tableHead,
     tableData,
     tableHeaderColor,
-    actionColumns
+    actionColumns,
+    onSortClick
   } = props;
   return (
     <div className={classes.tableResponsive}>
@@ -32,6 +36,18 @@ function CustomTable({ ...props }) {
                     key={key}
                   >
                     {prop}
+                    <Tooltip placement="middle" title="Sort">
+                      <Button
+                        mini={true}
+                        color="primary"
+                        variant="fab"
+                        onClick={onSortClick}
+                        aria-label="Sort"
+                      >
+                        <SortIcon />
+                      </Button>
+                    </Tooltip>
+
                   </TableCell>
                 );
               })}

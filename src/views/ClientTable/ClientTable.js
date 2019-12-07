@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 // @material-ui/core components
 import withStyles from '@material-ui/core/styles/withStyles';
 import Grid from '@material-ui/core/Grid';
@@ -10,8 +10,14 @@ import CardHeader from '../../component/Card/CardHeader';
 import CardBody from '../../component/Card/CardBody';
 import Edit from '@material-ui/icons/Edit';
 import Add from '@material-ui/icons/Add';
+import CssBaseline from "@material-ui/core/CssBaseline";
+import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
+import Pagination from "material-ui-flat-pagination";
+import Button from '@material-ui/core/Button';
+import Search from '@material-ui/icons/Search';
+import CustomInput from '../../component/CustomInput/CustomInput.jsx';
 
-const styles = {
+const styles = theme => ({
     cardCategoryWhite: {
         '&,& a,& a:hover,& a:focus': {
             color: 'rgba(255,255,255,.62)',
@@ -24,6 +30,7 @@ const styles = {
             color: '#FFFFFF'
         }
     },
+
     cardTitleWhite: {
         color: '#FFFFFF',
         marginTop: '0px',
@@ -38,10 +45,43 @@ const styles = {
             fontWeight: '400',
             lineHeight: '1'
         }
-    }
-};
+    },
+    searchWrapper: {
+        [theme.breakpoints.down("sm")]: {
+            width: "-webkit-fill-available",
+            margin: "10px 15px 0"
+        },
+        display: "inline-block"
+    },
+    margin: {
+        zIndex: "4",
+        margin: "0"
+    },
+    search: {
+        "& > div": {
+            marginTop: "0"
+        },
+        [theme.breakpoints.down("sm")]: {
+            margin: "10px 15px !important",
+            float: "none !important",
+            paddingTop: "1px",
+            paddingBottom: "1px",
+            padding: "0!important",
+            width: "60%",
+            marginTop: "40px",
+            "& input": {
+                color: "#FFFFFF"
+            }
+        }
+    },
+})
 
 function TableList(props) {
+    const [offset, setOffset] = useState(0);
+    const theme = createMuiTheme();
+    const handleClick = (newoffset) => {
+        setOffset(newoffset)
+    }
     const { classes } = props;
     const onEditClick = rowData => {
         alert(JSON.stringify(rowData));
@@ -62,6 +102,22 @@ function TableList(props) {
                         <p className={classes.cardCategoryWhite}>
                             Here is a subtitle for this table
             </p>
+                        <div className={classes.searchWrapper}>
+                            <CustomInput
+                                formControlProps={{
+                                    className: classes.margin + ' ' + classes.search
+                                }}
+                                inputProps={{
+                                    placeholder: 'Search',
+                                    inputProps: {
+                                        'aria-label': 'Search'
+                                    }
+                                }}
+                            />
+                            <Button color="white" aria-label="edit" justIcon round>
+                                <Search />
+                            </Button>
+                        </div>
                     </CardHeader>
                     <CardBody>
                         <Table
@@ -78,6 +134,15 @@ function TableList(props) {
                             ]}
                         />
                     </CardBody>
+                    <MuiThemeProvider theme={theme}>
+                        <CssBaseline />
+                        <Pagination
+                            limit={10}
+                            offset={offset}
+                            total={100}
+                            onClick={(e, offset) => handleClick(offset)}
+                        />
+                    </MuiThemeProvider>
                 </Card>
             </GridItem>
         </Grid>
