@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 // @material-ui/core components
 import withStyles from '@material-ui/core/styles/withStyles';
 import Grid from '@material-ui/core/Grid';
@@ -16,6 +16,23 @@ import Pagination from "material-ui-flat-pagination";
 import Button from '@material-ui/core/Button';
 import Search from '@material-ui/icons/Search';
 import CustomInput from '../../component/CustomInput/CustomInput.jsx';
+import { fetchAllCustomers } from '../../actions/customer';
+import { connect } from 'react-redux';
+import { useDispatch, useSelector } from "react-redux";
+
+const state = {
+    customers: [
+        // ['Dakota Rice', 'Niger', 'Oud-Turnhout', '$36,738', 'id', '712'],
+        // ['Minerva Hooper', 'Curaçao', 'Sinaai-Waas', '$23,789', 'id', '876'],
+        // ['Sage Rodriguez', 'Netherlands', 'Baileux', '$56,142', 'id', '432'],
+        // ['Philip Chaney', 'Korea, South', 'Overland Park', '$38,735', 'id', '323'],
+        // ['Doris Greene', 'Malawi', 'Feldkirchen in Kärnten', '$63,542', 'id', '123'],
+        // ['Mason Porter', 'Chile', 'Gloucester', '$78,615', 'id', '1']
+    ]
+};
+
+
+
 
 const styles = theme => ({
     cardCategoryWhite: {
@@ -77,6 +94,12 @@ const styles = theme => ({
 })
 
 function TableList(props) {
+    useEffect(() => {
+        props.getAllCustomers()
+    }, []);
+    const customers = useSelector(state => state.customers.customerList);
+    console.log(customers)
+    // const dispatch = useDispatch();
     const [offset, setOffset] = useState(0);
     const theme = createMuiTheme();
     const handleClick = (newoffset) => {
@@ -87,7 +110,6 @@ function TableList(props) {
         alert(JSON.stringify(rowData));
     };
     const onAddClick = rowData => {
-        alert(JSON.stringify(rowData));
     };
     const configActionColumns = [
         { Icon: Add, Tooltip: 'Add', Color: 'success', Callback: onAddClick },
@@ -123,15 +145,8 @@ function TableList(props) {
                         <Table
                             actionColumns={configActionColumns}
                             tableHeaderColor="primary"
-                            tableHead={['Name', 'Country', 'City', 'Salary']}
-                            tableData={[
-                                ['Dakota Rice', 'Niger', 'Oud-Turnhout', '$36,738'],
-                                ['Minerva Hooper', 'Curaçao', 'Sinaai-Waas', '$23,789'],
-                                ['Sage Rodriguez', 'Netherlands', 'Baileux', '$56,142'],
-                                ['Philip Chaney', 'Korea, South', 'Overland Park', '$38,735'],
-                                ['Doris Greene', 'Malawi', 'Feldkirchen in Kärnten', '$63,542'],
-                                ['Mason Porter', 'Chile', 'Gloucester', '$78,615']
-                            ]}
+                            tableHead={['Name', 'City', 'email', 'phone', 'address', 'postcode']}
+                            tableData={customers}
                         />
                     </CardBody>
                     <MuiThemeProvider theme={theme}>
@@ -149,4 +164,16 @@ function TableList(props) {
     );
 }
 
-export default withStyles(styles)(TableList);
+
+const mapDispatchToProps = dispatch => ({
+    getAllCustomers: () => {
+        dispatch(fetchAllCustomers())
+    }
+});
+
+
+const mapStateToProps = state => ({
+    customers: state.customerList
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(TableList));
