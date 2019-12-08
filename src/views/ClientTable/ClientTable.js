@@ -19,15 +19,10 @@ import CustomInput from '../../component/CustomInput/CustomInput.jsx';
 import { fetchAllCustomers } from '../../actions/customer';
 import { connect } from 'react-redux';
 import { useDispatch, useSelector } from "react-redux";
+import { Redirect } from 'react-router-dom'
 
 const state = {
     customers: [
-        // ['Dakota Rice', 'Niger', 'Oud-Turnhout', '$36,738', 'id', '712'],
-        // ['Minerva Hooper', 'Curaçao', 'Sinaai-Waas', '$23,789', 'id', '876'],
-        // ['Sage Rodriguez', 'Netherlands', 'Baileux', '$56,142', 'id', '432'],
-        // ['Philip Chaney', 'Korea, South', 'Overland Park', '$38,735', 'id', '323'],
-        // ['Doris Greene', 'Malawi', 'Feldkirchen in Kärnten', '$63,542', 'id', '123'],
-        // ['Mason Porter', 'Chile', 'Gloucester', '$78,615', 'id', '1']
     ]
 };
 
@@ -98,7 +93,6 @@ function TableList(props) {
         props.getAllCustomers()
     }, []);
     const customers = useSelector(state => state.customers.customerList);
-    console.log(customers)
     // const dispatch = useDispatch();
     const [offset, setOffset] = useState(0);
     const theme = createMuiTheme();
@@ -109,7 +103,9 @@ function TableList(props) {
     const onEditClick = rowData => {
         alert(JSON.stringify(rowData));
     };
-    const onAddClick = rowData => {
+    const onAddClick = () => {
+        console.log("click")
+        window.location.href = "../add-customer"
     };
     const configActionColumns = [
         { Icon: Add, Tooltip: 'Add', Color: 'success', Callback: onAddClick },

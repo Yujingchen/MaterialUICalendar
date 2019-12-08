@@ -30,40 +30,31 @@ export function fetchAllCustomers() {
     }
 }
 
-// export const locationGetById_REQ = (id) => ({
-//   type: ActionTypes.LOCATION_GETBYID_REQ,
-//   id: id,
-// });
+export const customerAdd = (payload) => ({
+    type: ActionTypes.ADD_CUSTOMER,
+    payload: payload
+});
 
-// export const locationGetById_OK = (location) => ({
-//   type: ActionTypes.LOCATION_GETBYID_OK,
-//   location: location,
-// });
-// export const locationGetById_X = () => ({
-//   type: ActionTypes.LOCATION_GETBYID_X,
-// });
 
-// export function getLocation(id) {
-//   return async (dispatch, getState) => {
-//     dispatch(locationGetById_REQ(id));
+export function addCustomer(customer) {
+    return async (dispatch, getState) => {
+        const ajaxRequest = {
+            method: 'put',
+            url: 'https://customerrest.herokuapp.com/api/customers',
+            customer: customer
+        };
 
-//     const ajaxRequest = {
-//       method: 'get',
-//       url: API_ROOT + '/location/' + id
-//     };
-
-//     axios(ajaxRequest)
-//       .then((response) => {
-//         dispatch(locationGetById_OK(response.data[0]));
-//       })
-//       .catch((error) => {
-//         console.error("Error: " + error);
-//         dispatch(locationGetById_X());
-//       })
-//       .then(() => {
-//         return {
-//           type: null
-//         };
-//       });
-//   };
-// }
+        axios(ajaxRequest)
+            .then(() => {
+                dispatch(customerAdd());
+            })
+            .catch((error) => {
+                console.error("Error: " + error);
+            })
+            .then(() => {
+                return {
+                    type: null
+                }; // 'Empty' action object
+            });
+    }
+};

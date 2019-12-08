@@ -7,7 +7,7 @@ import { BrowserRouter, Route, Router, Switch } from 'react-router-dom';
 import indexRoutes from './routes/index';
 import { GetBaseUrl } from './commons/commonFuncs';
 import { createBrowserHistory } from 'history';
-
+import ClientAdd from "./views/ClientTable/ClientAdd"
 
 const base = GetBaseUrl();
 const hist = createBrowserHistory({ basename: base });
@@ -16,6 +16,7 @@ const createRouter = () => {
     <BrowserRouter basename={base || '/'}>
       <Router history={hist}>
         <Switch>
+          <Route path="/add-customer" component={ClientAdd} />
           {indexRoutes.map((prop, key) => {
             return (
               <Route path={prop.path} component={prop.component} key={key} />

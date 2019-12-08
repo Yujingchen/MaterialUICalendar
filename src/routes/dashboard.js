@@ -34,6 +34,9 @@ const ClientTable = Loader(() =>
   import(/* webpackChunkName: "TableListView" */ '../views/ClientTable/ClientTable')
 );
 
+// const AddToClientTable = Loader(() =>
+//   import(/* webpackChunkName: "TableListView" */ '../views/ClientTable/ClientAdd')
+// )
 // const Typography = Loader(() =>
 //   import(/* webpackChunkName: "TypographyView" */ '../views/Typography/Typography.jsx')
 // );
@@ -80,6 +83,13 @@ export default [
     icon: ContentPaste,
     component: ClientTable
   },
+  // {
+  //   path: '/add-customer',
+  //   sidebarName: 'Table List',
+  //   navbarName: 'Table List',
+  //   icon: ContentPaste,
+  //   component: AddToClientTable
+  // },
   // {
   //   path: '/typography',
   //   sidebarName: 'Typography',
