@@ -16,7 +16,7 @@ const createRouter = () => {
     <BrowserRouter basename={base || '/'}>
       <Router history={hist}>
         <Switch>
-          <Route path="/add-customer" component={ClientAdd} />
+          <Route path="/table/add-customer" component={ClientAdd} />
           {indexRoutes.map((prop, key) => {
             return (
               <Route path={prop.path} component={prop.component} key={key} />

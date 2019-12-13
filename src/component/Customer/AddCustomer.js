@@ -58,10 +58,8 @@ class AddCustomer extends Component {
             errors: {}
         };
 
-        //// SUBMIT Customer ////
-
+        console.log(newCustomer)
         this.props.addCustomer(newCustomer);
-        //// DELETE CONTACT ////
         // Clear State
         this.setState({
             name: "",
@@ -72,8 +70,7 @@ class AddCustomer extends Component {
             postcode: "",
             errors: {}
         });
-
-        window.location.href = "../table"
+        this.props.historypath.push("/table")
     };
 
     onChange = e => this.setState({ [e.target.name]: e.target.value });

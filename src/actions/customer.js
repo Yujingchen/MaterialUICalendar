@@ -16,7 +16,6 @@ export function fetchAllCustomers() {
 
         axios(ajaxRequest)
             .then((response) => {
-                console.log(response.data)
                 dispatch(customersALL(response.data));
             })
             .catch((error) => {
@@ -30,6 +29,9 @@ export function fetchAllCustomers() {
     }
 }
 
+
+//todo
+
 export const customerAdd = (payload) => ({
     type: ActionTypes.ADD_CUSTOMER,
     payload: payload
@@ -38,15 +40,25 @@ export const customerAdd = (payload) => ({
 
 export function addCustomer(customer) {
     return async (dispatch, getState) => {
+        console.log(customer)
         const ajaxRequest = {
             method: 'put',
             url: 'https://customerrest.herokuapp.com/api/customers',
-            customer: customer
+            // Header: 'Content-Type': 'application/json',
+            // Body: {
+            //     "firstname": "Gary",
+            //     "lastname": "Philips",
+            //     "streetaddress": null,
+            //     "postcode": "23322",
+            //     "city": "Flintsone",
+            //     "email": "m.philips@mail.com",
+            //     "phone": "232-310122",
+            // }
         };
 
         axios(ajaxRequest)
             .then(() => {
-                dispatch(customerAdd());
+                dispatch(customerAdd(customer));
             })
             .catch((error) => {
                 console.error("Error: " + error);

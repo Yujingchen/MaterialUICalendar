@@ -105,7 +105,7 @@ function TableList(props) {
     };
     const onAddClick = () => {
         console.log("click")
-        window.location.href = "../add-customer"
+        props.history.push("./table/add-customer");
     };
     const configActionColumns = [
         { Icon: Add, Tooltip: 'Add', Color: 'success', Callback: onAddClick },

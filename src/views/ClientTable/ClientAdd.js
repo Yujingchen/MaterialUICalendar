@@ -4,7 +4,7 @@ class ClientAdd extends Component {
     render() {
         return (
             <div>
-                <AddCustomer></AddCustomer>
+                <AddCustomer historypath={this.props.history}></AddCustomer>
             </div>
         );
     }
