@@ -36,7 +36,7 @@ function CustomTable({ ...props }) {
                     key={key}
                   >
                     {prop}
-                    <Tooltip placement="middle" title="Sort">
+                    <Tooltip placement="left" title="Sort">
                       <Button
                         mini={true}
                         color="primary"
@@ -68,7 +68,7 @@ function CustomTable({ ...props }) {
           </TableHead>
         ) : null}
         <TableBody>
-          {tableData.map((prop, key) => {
+          {tableData && typeof tableData === 'object' && tableData.constructor === Array ? (tableData.map((prop, key) => {
             return (
               <TableRow key={key}>
                 {prop.map((item, key) => {
@@ -81,7 +81,8 @@ function CustomTable({ ...props }) {
                 <ActionCell actionColumns={actionColumns} rowData={prop} />
               </TableRow>
             );
-          })}
+          })) : null
+          }
         </TableBody>
       </Table>
     </div>

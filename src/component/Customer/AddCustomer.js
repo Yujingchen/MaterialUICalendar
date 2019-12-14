@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
-import { addCustomer } from "../../actions/customer";
+import { connect } from 'react-redux';
+import { addCustomer } from "../../actions/customerAction";
 import TextInputGroup from "../../layouts/TextInputGroup"
 
 class AddCustomer extends Component {

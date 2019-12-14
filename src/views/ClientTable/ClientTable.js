@@ -16,19 +16,8 @@ import Pagination from "material-ui-flat-pagination";
 import Button from '@material-ui/core/Button';
 import Search from '@material-ui/icons/Search';
 import CustomInput from '../../component/CustomInput/CustomInput.jsx';
-import { fetchAllCustomers } from '../../actions/customer';
-import { connect } from 'react-redux';
-import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from 'react-router-dom'
-
-const state = {
-    customers: [
-    ]
-};
-
-
-
-
+import { fetchAllCustomers } from '../../actions/customerAction';
+import { connect } from 'react-redux'
 const styles = theme => ({
     cardCategoryWhite: {
         '&,& a,& a:hover,& a:focus': {
@@ -91,8 +80,9 @@ const styles = theme => ({
 function TableList(props) {
     useEffect(() => {
         props.getAllCustomers()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
-    const customers = useSelector(state => state.customers.customerList);
+    // const customers = useSelector(state => state.customers);
     // const dispatch = useDispatch();
     const [offset, setOffset] = useState(0);
     const theme = createMuiTheme();
@@ -111,38 +101,42 @@ function TableList(props) {
         { Icon: Add, Tooltip: 'Add', Color: 'success', Callback: onAddClick },
         { Icon: Edit, Tooltip: 'Edit', Color: 'primary', Callback: onEditClick }
     ];
+    //todo input data binding, search function
     return (
         <Grid container>
             <GridItem xs={12} sm={12} md={12}>
                 <Card>
                     <CardHeader color="primary">
-                        <h4 className={classes.cardTitleWhite}>Simple Table</h4>
-                        <p className={classes.cardCategoryWhite}>
-                            Here is a subtitle for this table
-            </p>
-                        <div className={classes.searchWrapper}>
-                            <CustomInput
-                                formControlProps={{
-                                    className: classes.margin + ' ' + classes.search
-                                }}
-                                inputProps={{
-                                    placeholder: 'Search',
-                                    inputProps: {
-                                        'aria-label': 'Search'
-                                    }
-                                }}
-                            />
-                            <Button color="white" aria-label="edit" justIcon round>
-                                <Search />
-                            </Button>
-                        </div>
+                        <Grid container direction="row" justify="space-between" alignItems="center">
+                            <h3 className={classes.cardTitleWhite}>Client</h3>
+
+                            <div className={classes.searchWrapper}>
+                                <CustomInput
+                                    formControlProps={{
+                                        className: classes.margin + ' ' + classes.search
+                                    }}
+                                    inputProps={{
+                                        placeholder: 'Search',
+                                        inputProps: {
+                                            'aria-label': 'Search'
+                                        }
+                                    }}
+                                />
+                                <Button color="default" aria-label="edit" round='true'>
+                                    <Search />
+                                </Button>
+                            </div>
+                        </Grid>
+
+
+
                     </CardHeader>
                     <CardBody>
                         <Table
                             actionColumns={configActionColumns}
                             tableHeaderColor="primary"
                             tableHead={['Name', 'City', 'email', 'phone', 'address', 'postcode']}
-                            tableData={customers}
+                            tableData={props.customers}
                         />
                     </CardBody>
                     <MuiThemeProvider theme={theme}>
@@ -169,7 +163,7 @@ const mapDispatchToProps = dispatch => ({
 
 
 const mapStateToProps = state => ({
-    customers: state.customerList
+    customers: state.customers.customers
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(TableList));

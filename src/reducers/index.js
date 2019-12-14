@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
 
-import customers from "./customers";
+import customers from "./customersReducer";
 import trainings from "./trainingReducer"
 const rootReducers = () =>
     combineReducers({

@@ -18,7 +18,6 @@ class Calendar extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-
         }
     }
     //Todo link customer on event clicked
