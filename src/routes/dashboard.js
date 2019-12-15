@@ -31,7 +31,7 @@ const DashboardPage = Loader(() =>
 // );
 
 const ClientTable = Loader(() =>
-  import(/* webpackChunkName: "TableListView" */ '../views/ClientTable/ClientTable')
+  import(/* webpackChunkName: "TableListView" */ '../views/Customer/ClientTable')
 );
 
 // const AddToClientTable = Loader(() =>

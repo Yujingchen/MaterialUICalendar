@@ -23,7 +23,9 @@ function CustomInput({ ...props }) {
     inputProps,
     error,
     errorText,
-    success
+    success,
+    value,
+    inputChange
   } = props;
 
   const labelClasses = classNames({
@@ -59,6 +61,8 @@ function CustomInput({ ...props }) {
           underline: underlineClasses
         }}
         id={id}
+        defaultValue={value}
+        onChange={inputChange}
         {...inputProps}
       />
       {error ? (

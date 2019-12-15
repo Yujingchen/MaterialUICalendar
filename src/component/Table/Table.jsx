@@ -36,13 +36,11 @@ function CustomTable({ ...props }) {
                     key={key}
                   >
                     {prop}
-                    <Tooltip placement="left" title="Sort">
+                    <Tooltip placement="right" title="Sort">
                       <Button
                         mini={true}
                         color="primary"
-                        variant="fab"
-                        onClick={onSortClick}
-                        aria-label="Sort"
+                        onClick={() => onSortClick(prop)}
                       >
                         <SortIcon />
                       </Button>

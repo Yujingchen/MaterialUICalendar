@@ -13,8 +13,6 @@ import Add from '@material-ui/icons/Add';
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
 import Pagination from "material-ui-flat-pagination";
-import Button from '@material-ui/core/Button';
-import Search from '@material-ui/icons/Search';
 import CustomInput from '../../component/CustomInput/CustomInput.jsx';
 import { fetchAllCustomers } from '../../actions/customerAction';
 import { connect } from 'react-redux'
@@ -78,30 +76,89 @@ const styles = theme => ({
 })
 
 function TableList(props) {
+    const [query, setQuery] = useState("");
+    const [offset, setOffset] = useState(0);
+    const [sortName, setSortName] = useState(false)
+    const [sortCity, setSortCity] = useState(false)
+    const [sortEmail, setSortEmail] = useState(false)
+    const [sortPhone, setSortPhone] = useState(false)
+    const [sortAddress, setSortAddress] = useState(false)
+    const [sortPostCode, setSortPostCode] = useState(false)
+    let tableData = props.customers
     useEffect(() => {
         props.getAllCustomers()
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
-    // const customers = useSelector(state => state.customers);
-    // const dispatch = useDispatch();
-    const [offset, setOffset] = useState(0);
-    const theme = createMuiTheme();
-    const handleClick = (newoffset) => {
+    }, [query])
+    const theme = createMuiTheme({
+        typography: {
+            useNextVariants: true,
+        },
+    });
+    const { classes } = props;
+    const sortDataByName = (data) => {
+        return (data.sort((a, b) => a[0] > b[0] ? 0 : -1))
+    }
+    const sortDataByCity = (data) => {
+        return (data.sort((a, b) => a[1] > b[1] ? 0 : -1))
+    }
+    const sortDataByEmail = (data) => {
+        return (data.sort((a, b) => a[2] > b[2] ? 0 : -1))
+    }
+    const sortDataByPhone = (data) => {
+        return (data.sort((a, b) => a[3] > b[3] ? 0 : -1))
+    }
+    const sortDataByAddress = (data) => {
+        return (data.sort((a, b) => a[4] > b[4] ? 0 : -1))
+    }
+    const sortDataByPostcode = (data) => {
+        return (data.sort((a, b) => a[5] > b[5] ? 0 : -1))
+    }
+    const handleSortClick = (prop) => {
+        if (prop === null) {
+        }
+        else if (prop === "Name") {
+
+            setSortName(!sortName)
+            return tableData = sortDataByName(tableData)
+        }
+        else if (prop === "City") {
+            setSortCity(!sortCity)
+            return tableData = sortDataByCity(tableData)
+        }
+        else if (prop === "Email") {
+            setSortEmail(!sortEmail)
+            return tableData = sortDataByEmail(tableData)
+        }
+        else if (prop === "Phone") {
+            setSortPhone(!sortPhone)
+            return tableData = sortDataByPhone(tableData)
+        }
+        else if (prop === "Address") {
+            setSortAddress(!sortAddress)
+            return tableData = sortDataByAddress(tableData)
+        }
+        else if (prop === "Postcode") {
+            setSortPostCode(!sortPostCode)
+            return tableData = sortDataByPostcode(tableData)
+        }
+    }
+
+    const handlePaginationClick = (newoffset) => {
         setOffset(newoffset)
     }
-    const { classes } = props;
-    const onEditClick = rowData => {
-        alert(JSON.stringify(rowData));
+    const onEditClick = () => {
+        props.history.push("./table/edit-customer");
     };
     const onAddClick = () => {
-        console.log("click")
         props.history.push("./table/add-customer");
     };
+    const searchInputChange = (e) => {
+        setQuery(e.target.value)
+    }
     const configActionColumns = [
         { Icon: Add, Tooltip: 'Add', Color: 'success', Callback: onAddClick },
         { Icon: Edit, Tooltip: 'Edit', Color: 'primary', Callback: onEditClick }
     ];
-    //todo input data binding, search function
     return (
         <Grid container>
             <GridItem xs={12} sm={12} md={12}>
@@ -115,28 +172,25 @@ function TableList(props) {
                                     formControlProps={{
                                         className: classes.margin + ' ' + classes.search
                                     }}
+                                    value={query}
+                                    inputChange={searchInputChange}
                                     inputProps={{
-                                        placeholder: 'Search',
+                                        placeholder: 'Search by name',
                                         inputProps: {
-                                            'aria-label': 'Search'
+                                            'aria-label': 'Search by name'
                                         }
                                     }}
                                 />
-                                <Button color="default" aria-label="edit" round='true'>
-                                    <Search />
-                                </Button>
                             </div>
                         </Grid>
-
-
-
                     </CardHeader>
                     <CardBody>
                         <Table
                             actionColumns={configActionColumns}
                             tableHeaderColor="primary"
-                            tableHead={['Name', 'City', 'email', 'phone', 'address', 'postcode']}
-                            tableData={props.customers}
+                            tableHead={['Name', 'City', 'Email', 'Phone', 'Address', 'Postcode']}
+                            tableData={tableData.filter((item) => item[0].toLowerCase().indexOf(query.toLowerCase()) !== -1)}
+                            onSortClick={handleSortClick}
                         />
                     </CardBody>
                     <MuiThemeProvider theme={theme}>
@@ -145,7 +199,7 @@ function TableList(props) {
                             limit={10}
                             offset={offset}
                             total={100}
-                            onClick={(e, offset) => handleClick(offset)}
+                            onClick={(e, offset) => handlePaginationClick(offset)}
                         />
                     </MuiThemeProvider>
                 </Card>

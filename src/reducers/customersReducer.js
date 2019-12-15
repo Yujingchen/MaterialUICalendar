@@ -2,7 +2,8 @@ import ActionTypes from "../actions/types";
 
 export const initialState = {
     customers: [],
-    rawData: []
+    rawData: [],
+    customer: {}
 };
 
 export default function customersReducer(state = initialState, action) {
@@ -14,30 +15,37 @@ export default function customersReducer(state = initialState, action) {
                 customers: formateData(action.payload.content)
             }
         case ActionTypes.ADD_CUSTOMER:
+            return state
+        case ActionTypes.EDIT_CUSTOMER:
+            return state
+        case ActionTypes.GET_CUSTOMER:
             return {
                 ...state,
-                customers: [...this.state.customers, newCustomer(action.payload)]
+                customer: formateData(action.payload.content)
             }
         case null:
             return state;
         default:
             return state;
-
     }
 }
 
 const formateData = (raw) => {
-    return (
-        raw.map((item) => {
-            return ([[item.firstname, item.lastname].join(" "), item.city, item.email, item.phone, item.streetaddress, item.postcode])
-        }))
+    if (raw && typeof raw === 'object' && raw.constructor === Array) {
+        return (
+            raw.map((item) => {
+                return ([[item.firstname, item.lastname].join(" "), item.city, item.email, item.phone, item.streetaddress, item.postcode])
+            }))
+    }
+    else if (raw && typeof raw === 'object' && raw.constructor !== Array) {
+        return ([[raw.firstname, raw.lastname].join(" "), raw.city, raw.email, raw.phone, raw.streetaddress, raw.postcode])
+    }
 }
 
+
 const newCustomer = (customerObj) => {
-    const arr = []
-    return (
-        customerObj.map((key, att) => {
-            return (arr.concat([customerObj[key]]))
-        })
-    )
+    const customerKeys = Object.keys(customerObj)
+    return (customerKeys.map((key) => {
+        return (customerObj[key])
+    }))
 }
