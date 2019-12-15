@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { connect } from 'react-redux';
-import { addCustomer } from "../../actions/customerAction";
+// import { connect } from 'react-redux';
+// import { addCustomer } from "../../actions/customerAction";
 import TextInputGroup from "../../layouts/TextInputGroup"
 
 class ClientEdit extends Component {
@@ -55,15 +55,15 @@ class ClientEdit extends Component {
         }
 
         // const newID = this.props.customers.length + 1
-        const newCustomer = {
-            firstname,
-            lastname,
-            streetaddress,
-            postcode,
-            city,
-            email,
-            phone,
-        };
+        // const newCustomer = {
+        //     firstname,
+        //     lastname,
+        //     streetaddress,
+        //     postcode,
+        //     city,
+        //     email,
+        //     phone,
+        // };
 
 
         // this.props.addNewCustomer(newCustomer);
@@ -161,15 +161,15 @@ class ClientEdit extends Component {
     }
 }
 
-const mapStateToProps = state => ({
-    customer: state.customers.customer
-});
+// const mapStateToProps = state => ({
+//     customer: state.customers.customer
+// });
 
 //TODO fetch single customer
-const mapDispatchToProps = dispatch => ({
-    // getCustomer: () => {
-    //     dispatch(fetchCustomer())
-    // }
-});
+// const mapDispatchToProps = dispatch => ({
+//     getCustomer: () => {
+//         dispatch(fetchCustomer())
+//     }
+// });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ClientEdit);
+export default ClientEdit;

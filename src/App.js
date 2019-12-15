@@ -9,7 +9,9 @@ import { GetBaseUrl } from './commons/commonFuncs';
 import { createBrowserHistory } from 'history';
 import ClientAdd from "./views/Customer/ClientAdd"
 import ClientEdit from "./views/Customer/ClientEdit"
-
+import Signin from "./component/Signin/Signin"
+import { UserIsAuthenticated } from "./helpers/auth";
+import { UserIsNotAuthenticated } from "./helpers/auth";
 const base = GetBaseUrl();
 const hist = createBrowserHistory({ basename: base });
 const createRouter = () => {
@@ -17,11 +19,12 @@ const createRouter = () => {
     <BrowserRouter basename={base || '/'}>
       <Router history={hist}>
         <Switch>
-          <Route path="/table/add-customer" component={ClientAdd} />
-          <Route path="/table/edit-customer" component={ClientEdit} />
+          <Route path="/signin" component={UserIsNotAuthenticated(Signin)} />
+          <Route path="/table/add-customer" component={UserIsAuthenticated(ClientAdd)} />
+          <Route path="/table/edit-customer" component={UserIsAuthenticated(ClientEdit)} />
           {indexRoutes.map((prop, key) => {
             return (
-              <Route path={prop.path} component={prop.component} key={key} />
+              <Route path={prop.path} component={UserIsAuthenticated(prop.component)} key={key} />
             );
           })}
         </Switch>

@@ -43,9 +43,9 @@ const formateData = (raw) => {
 }
 
 
-const newCustomer = (customerObj) => {
-    const customerKeys = Object.keys(customerObj)
-    return (customerKeys.map((key) => {
-        return (customerObj[key])
-    }))
-}
+// const newCustomer = (customerObj) => {
+//     const customerKeys = Object.keys(customerObj)
+//     return (customerKeys.map((key) => {
+//         return (customerObj[key])
+//     }))
+// }
