@@ -27,3 +27,34 @@ export function fetchAllTrainings() {
             });
     }
 }
+
+export const addTrainingDispatch = () => ({
+    type: ActionTypes.ADD_TRAINING
+});
+
+
+export function addTraining(training) {
+    console.log(JSON.stringify(training))
+    return async (dispatch, getState) => {
+        const ajaxRequest = {
+            method: 'POST',
+            url: 'https://customerrest.herokuapp.com/api/trainings',
+            headers: { "Content-Type": "application/json" },
+            data: JSON.stringify(training),
+            dataType: "application/json"
+        };
+
+        axios(ajaxRequest)
+            .then(() => {
+                dispatch(addTrainingDispatch());
+            })
+            .catch((error) => {
+                console.error("Error: " + error);
+            })
+            .then(() => {
+                return {
+                    type: null
+                }; // 'Empty' action object
+            });
+    }
+};

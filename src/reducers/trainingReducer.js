@@ -16,18 +16,20 @@ export default function trainingsReducer(state = initialState, action) {
                 }
             }
             return state;
-        //Todo Add trainning
-        // case ActionTypes.ADD_CUSTOMER:
-        //     return {
-        //         ...state,
-        //         customerList: [...this.state.customerList, newCustomer(action.payload)]
-        //     }
+        case ActionTypes.ADD_TRAINING:
+            return state
         case null:
             return state;
         default:
             return state;
     }
 }
+
+
+
+
+
+
 
 const formatData = (rawData) => {
     if (rawData && typeof rawData === 'object' && rawData.constructor === Array) {

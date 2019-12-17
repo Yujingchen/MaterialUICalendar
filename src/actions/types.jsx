@@ -4,6 +4,7 @@ const ActionTypes = {
     Edit_CUSTOMER: "EDIT_CUSTOMER",
     GET_ALL_TRAINING: "GET_ALL_TRAINING",
     GET_CUSTOMER: "GET_CUSTOMER",
-    USER_LOGIN: "USER_LOGIN"
+    USER_LOGIN: "USER_LOGIN",
+    ADD_TRAINING: "ADD_TRAINING"
 }
 export default ActionTypes;

@@ -54,13 +54,14 @@ class Calendar extends React.Component {
     //Todo, allow adding customized event
     handleDateClick = arg => {
         if (window.confirm("Would you like to add an training event to " + arg.dateStr + " ?")) {
-            this.setState({
-                calendarEvents: this.state.calendarEvents.concat({
-                    title: "New Event",
-                    start: arg.date,
-                    allDay: arg.allDay
-                })
-            });
+            this.props.history.push(`./dashboard/add-training/${arg.dateStr}`);
+            // this.setState({
+            //     calendarEvents: this.state.calendarEvents.concat({
+            //         title: "New Event",
+            //         start: arg.date,
+            //         allDay: arg.allDay
+            //     })
+            // });
         }
     };
 }

@@ -8,7 +8,7 @@ class Dashboard extends Component {
     render() {
         return (
             <div>
-                <Calendar></Calendar>
+                <Calendar history={this.props.history}></Calendar>
             </div>
         );
     }

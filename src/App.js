@@ -10,6 +10,7 @@ import { createBrowserHistory } from 'history';
 import ClientAdd from "./views/Customer/ClientAdd"
 import ClientEdit from "./views/Customer/ClientEdit"
 import Signin from "./component/Signin/Signin"
+import AddTraining from "./views/Dashboard/AddTraining"
 import { UserIsAuthenticated } from "./helpers/auth";
 import { UserIsNotAuthenticated } from "./helpers/auth";
 const base = GetBaseUrl();
@@ -22,6 +23,7 @@ const createRouter = () => {
           <Route path="/signin" component={UserIsNotAuthenticated(Signin)} />
           <Route path="/table/add-customer" component={UserIsAuthenticated(ClientAdd)} />
           <Route path="/table/edit-customer" component={UserIsAuthenticated(ClientEdit)} />
+          <Route path="/dashboard/add-training/:date" component={UserIsAuthenticated(AddTraining)} />
           {indexRoutes.map((prop, key) => {
             return (
               <Route path={prop.path} component={UserIsAuthenticated(prop.component)} key={key} />
