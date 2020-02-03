@@ -85,7 +85,10 @@ class ClientAdd extends Component {
             postcode: "",
             errors: {}
         });
-        this.props.history.push("/table")
+
+        (() => setTimeout(this.props.history.push("/table"), 1))();
+
+
     };
 
     onChange = e => this.setState({ [e.target.name]: e.target.value });

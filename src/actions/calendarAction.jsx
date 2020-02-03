@@ -34,7 +34,6 @@ export const addTrainingDispatch = () => ({
 
 
 export function addTraining(training) {
-    console.log(JSON.stringify(training))
     return async (dispatch, getState) => {
         const ajaxRequest = {
             method: 'POST',

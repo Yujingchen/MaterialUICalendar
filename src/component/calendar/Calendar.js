@@ -22,12 +22,10 @@ class Calendar extends React.Component {
     }
     //Todo link customer on event clicked
     componentDidMount() {
-        console.log("here")
         this.props.getTrainings()
     }
     render() {
         const { classes } = this.props
-        console.log(this.props)
         return (
             <div className={classes.calendarLayout}>
                 <div className={classes.calendarLayoutTop}>

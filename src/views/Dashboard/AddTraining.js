@@ -48,7 +48,6 @@ class ClientAdd extends Component {
             duration,
             customer: `https://localhost:8080/api/customers/${customerId}`,
         };
-        console.log(newTraining.date)
 
         this.props.addNewTraining(newTraining);
         // Clear State

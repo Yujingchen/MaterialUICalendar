@@ -16,19 +16,5 @@ firebase.initializeApp(config);
 // const firebaseDB = firebase.database();
 
 
-// const rrfConfig = {
-//     userProfile: "users",
-//     useFirestoreForProfile: true //Firestore for Profile instead of Realtime DB
-// };
-
-
-
-
-// firebaseDB
-//   .ref("matches")
-//   .once("value")
-//   .then(snapshot => {
-//     console.log(snapshot.val());
-//   });
 
 export { firebase };

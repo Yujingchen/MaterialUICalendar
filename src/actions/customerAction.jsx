@@ -62,7 +62,6 @@ export const addCustomerDispatch = () => ({
 
 
 export function addCustomer(customer) {
-    console.log(JSON.stringify(customer))
     return async (dispatch, getState) => {
         const ajaxRequest = {
             method: 'POST',
@@ -89,7 +88,6 @@ export function addCustomer(customer) {
 
 
 export function editCustomer(customer) {
-    console.log(JSON.stringify(customer))
     return async (dispatch, getState) => {
         const ajaxRequest = {
             method: 'PUT',
