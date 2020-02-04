@@ -45,6 +45,7 @@ const Sidebar = ({ ...props }) => {
                     [" " + classes.whiteFont]: activeRoute(prop.path)
                 });
                 return (
+
                     <NavLink
                         to={prop.path}
                         className={activePro + classes.item}
@@ -78,51 +79,23 @@ const Sidebar = ({ ...props }) => {
     );
     return (
         <div>
-            <Hidden mdUp>
-                <Drawer
-                    variant="temporary"
-                    anchor="right"
-                    open={props.open}
-                    classes={{
-                        paper: classes.drawerPaper
-                    }}
-                    onClose={props.handleDrawerToggle}
-                    ModalProps={{
-                        keepMounted: true // Better open performance on mobile.
-                    }}
-                >
-                    {brand}
-                    <div className={classes.sidebarWrapper}>
-                        {/* <HeaderLinks /> */}
-                        {links}
-                    </div>
-                    {image !== undefined ? (
-                        <div
-                            className={classes.background}
-                            style={{ backgroundImage: "url(" + image + ")" }}
-                        />
-                    ) : null}
-                </Drawer>
-            </Hidden>
-            <Hidden smDown>
-                <Drawer
-                    anchor="left"
-                    variant="permanent"
-                    open
-                    classes={{
-                        paper: classes.drawerPaper
-                    }}
-                >
-                    {brand}
-                    <div className={classes.sidebarWrapper}>{links}</div>
-                    {image !== undefined ? (
-                        <div
-                            className={classes.background}
-                            style={{ backgroundImage: "url(" + image + ")" }}
-                        />
-                    ) : null}
-                </Drawer>
-            </Hidden>
+            <Drawer
+                open={false}
+                onClose={props.handleDrawerToggle}
+                variant="permanent"
+                classes={{
+                    paper: classes.drawerPaper
+                }}
+            >
+                {brand}
+                <div className={classes.sidebarWrapper}>{links}</div>
+                {image !== undefined ? (
+                    <div
+                        className={classes.background}
+                        style={{ backgroundImage: "url(" + image + ")" }}
+                    />
+                ) : null}
+            </Drawer>
         </div>
     );
 };

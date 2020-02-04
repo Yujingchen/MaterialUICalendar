@@ -13,7 +13,8 @@ import Sidebar from '../component/sidebar/Sidebar';
 // import MessageBox from '../components/MessageBox';
 import dashboardRoutes from '../routes/dashboard';
 import dashboardStyle from './dashboardStyle.jsx';
-
+import Drawer from '@material-ui/core/Drawer';
+import Button from '@material-ui/core/Button';
 //Actions
 // import NotificationActions from '../actions/Notifications';
 
@@ -50,7 +51,8 @@ class App extends React.Component {
     super(props, context);
 
     this.state = {
-      mobileOpen: false
+      mobileOpen: false,
+      open: false
     };
   }
 
@@ -69,32 +71,29 @@ class App extends React.Component {
     this.refs.mainPanel.scrollTop = 0;
     if (this.state.mobileOpen) this.setState({ mobileOpen: false });
   }
-
-  // onNotificationChange = items => {
-  //   this.props.actions.addOrUpdateNotifications(items);
-  // };
-
-  // onNotificationDelete = items => {
-  //   this.props.actions.deleteNotifications(items);
-  // };
+  handleDrawerToggle = (open) => event => {
+    this.setState({ ...this.state, open: open });
+  };
 
   render() {
-    const { classes, notifications, messageBox, ...rest } = this.props;
+    const { classes, notifications, messageBox, left, ...rest } = this.props;
     return (
       <div className={classes.wrapper}>
-        {/* <MessageBox {...messageBox} open={messageBox.open || false} /> */}
-
+        {/* Use drawer */}
         <Sidebar
           routes={dashboardRoutes}
           logoText={'TRAININGO'}
           logo={logo}
           image={image}
-          handleDrawerToggle={this.handleDrawerToggle}
-          open={this.state.mobileOpen}
+          toggleDrawer={this.handleDrawerToggle()}
+          open={this.state.open}
           color="blue"
           {...rest}
         />
+
         <div className={classes.mainPanel} ref="mainPanel">
+          <Button onClick={this.handleDrawerToggle(true)}>Open sidebar</Button>
+
           {/* <Header
             routes={dashboardRoutes}
             handleDrawerToggle={this.handleDrawerToggle}
@@ -104,7 +103,6 @@ class App extends React.Component {
             notificationBackgroundImage={image}
             {...rest}
           /> */}
-          {/* On the /maps route we want the map to be on full screen - this is not possible if the content and conatiner classes are present because they have some paddings which would make the map smaller */}
           {this.getRoute() ? (
             <div className={classes.content}>
               <div className={classes.container}>{switchRoutes}</div>
@@ -112,7 +110,6 @@ class App extends React.Component {
           ) : (
               <div className={classes.map}>{switchRoutes}</div>
             )}
-          {/* {this.getRoute() ? <Footer /> : null} */}
         </div>
       </div>
     );
